@@ -11,4 +11,8 @@ export const GlobalStyles = createGlobalStyle`
         min-height: 100vh;
         font-family: sans-serif;
     }
+    img {
+        width: 10rem;
+    }
+
 `;
