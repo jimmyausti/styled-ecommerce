@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ShopContext } from "../../../context/ShopContext";
+
 
 const ShopItemWrapper = styled.div`
   margin: 2rem 0;
@@ -24,11 +26,14 @@ const ShopItemWrapper = styled.div`
 
 export const ShopItem = (props) => {
   const { image, title, price } = props;
+  const {addToCart} = useContext(ShopContext);
+
   return (
     <ShopItemWrapper>
       <img src={image} alt={title} />
       <p>{title}</p>
       <p>${price}</p>
+      <button onClick={() => addToCart(title, image, price)}>Add to Cart</button>
     </ShopItemWrapper>
   );
 };
