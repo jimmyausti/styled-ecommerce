@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ShopContext } from "../../../context/ShopContext";
 
@@ -13,27 +13,36 @@ const ShopItemWrapper = styled.div`
   justify-content: center;
   border: 1px solid;
   text-align: center;
-
   @media (max-width: 772px) {
      width: calc((100% / 2)); 
   }
-
   @media (max-width: 570px) {
     width: calc((100% / 1));
   }
 `;
 
 
+
 export const ShopItem = (props) => {
-  const { image, title, price } = props;
+  const { id, image, title, price } = props;
   const {addToCart} = useContext(ShopContext);
+  const [count, setCount] = useState(0);
+  
+
+
+
+  const handleAddToCart = () => {
+    addToCart(title, image, id, price);
+    setCount((prevCount) => prevCount + 1);
+  };
+
 
   return (
     <ShopItemWrapper>
       <img src={image} alt={title} />
       <p>{title}</p>
       <p>${price}</p>
-      <button onClick={() => addToCart(title, image, price)}>Add to Cart</button>
+      <button onClick={handleAddToCart}>Add to Cart {count ? `(${count})` : null}</button>
     </ShopItemWrapper>
   );
 };

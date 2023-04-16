@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-// import Context from './context'
 import Checkout from './pages/checkout/Checkout';
 import Shop from './pages/shop/Shop';
 import { GlobalStyles } from './pages/StyledComponents/GlobalStyles';

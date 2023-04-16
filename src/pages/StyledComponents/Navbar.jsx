@@ -16,7 +16,6 @@ const Links = styled(Link)`
   color: #fff;
   text-decoration: none;
   margin-right: 0.2rem;
-
   &:hover {
     text-decoration: underline;
   } 

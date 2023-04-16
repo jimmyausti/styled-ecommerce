@@ -1,40 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../../context/ShopContext";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
 import CheckoutItem from "./Components/CheckoutItem";
 
 const Checkout = () => {
-  const { items, addToCart } = useContext(ShopContext);
+  const { items } = useContext(ShopContext);
+  const [result, setResult] = useState([])
 
-  
+useEffect(() => {
+    const counts = items.reduce((acc, item) => {
+      const key = JSON.stringify(item);
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {});
+    
+    const result = Object.entries(counts).map(([key, count]) => {
+      const product = JSON.parse(key);
+      return { ...product, count };
+    });
 
-  const { data } = useQuery(["products"], () =>
-    axios.get("https://fakestoreapi.com/products").then((res) => res.data)
-  );
+    setResult(result)
+}, [items])
 
-
-  const filteredData = data?.filter((item) =>
-  items.some((cartItem) => cartItem.title === item.title)
-);
-
-
-  console.log(filteredData);
 
   return (
     <div>
-      { 
-        filteredData?.map((product) => {
-          return (
-            <div key={product.id}>
-            <CheckoutItem {...product}/>
-            </div>
-          );
-        })}
-        {filteredData?.length === 0 && <h1>Nothing is here!</h1>}
+      {result.map((product) => {
+        return (
+          <div key={product.id}>
+            <CheckoutItem {...product} />
+          </div>
+        );
+      })}
+      {result.length === 0 && <h1>Nothing is here!</h1>}
     </div>
   );
 };
 
 export default Checkout;
-
