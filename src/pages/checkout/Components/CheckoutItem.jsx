@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { ShopContext } from "../../../context/ShopContext";
+import React from "react";
 
 const CheckoutItem = (props) => {
   const { image, title, count } = props;

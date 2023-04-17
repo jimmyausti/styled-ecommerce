@@ -24,16 +24,24 @@ const ShopItemWrapper = styled.div`
 
 
 export const ShopItem = (props) => {
-  const { id, image, title, price } = props;
-  const {addToCart} = useContext(ShopContext);
-  const [count, setCount] = useState(0);
+  const { id, image, title, price, result } = props;
+  const {addToCart } = useContext(ShopContext);
   
+console.log(result)
 
+
+//  const countArray = result?.map(obj => {
+//   return {
+//     id: obj.id,
+//     count: obj.count
+//   }
+//  })
+
+//  console.log(countArray)
 
 
   const handleAddToCart = () => {
     addToCart(title, image, id, price);
-    setCount((prevCount) => prevCount + 1);
   };
 
 
@@ -42,7 +50,7 @@ export const ShopItem = (props) => {
       <img src={image} alt={title} />
       <p>{title}</p>
       <p>${price}</p>
-      <button onClick={handleAddToCart}>Add to Cart {count ? `(${count})` : null}</button>
+      <button onClick={handleAddToCart}>Add to Cart  <>{result[id] && result[id].count}</></button>
     </ShopItemWrapper>
   );
 };

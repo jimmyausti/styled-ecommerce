@@ -1,27 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../../context/ShopContext";
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
 import CheckoutItem from "./Components/CheckoutItem";
 
 const Checkout = () => {
-  const { items } = useContext(ShopContext);
-  const [result, setResult] = useState([])
+  const { result } = useContext(ShopContext);
+  // const [result, setResult] = useState([])
 
-useEffect(() => {
-    const counts = items.reduce((acc, item) => {
-      const key = JSON.stringify(item);
-      acc[key] = (acc[key] || 0) + 1;
-      return acc;
-    }, {});
-    
-    const result = Object.entries(counts).map(([key, count]) => {
-      const product = JSON.parse(key);
-      return { ...product, count };
-    });
-
-    setResult(result)
-}, [items])
+// useEffect(() => {
+//     const counts = items.reduce((acc, item) => {
+//       const key = JSON.stringify(item);
+//       acc[key] = (acc[key] || 0) + 1;
+//       return acc;
+//     }, {});
+//     const result = Object.entries(counts).map(([key, count]) => {
+//       const product = JSON.parse(key);
+//       return { ...product, count };
+//     });
+//     setResult(result)
+// }, [items])
 
 
   return (
