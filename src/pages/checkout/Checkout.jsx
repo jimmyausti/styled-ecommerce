@@ -1,31 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { ShopContext } from "../../context/ShopContext";
 import CheckoutItem from "./Components/CheckoutItem";
 
+
 const Checkout = () => {
-  const { result } = useContext(ShopContext);
-  // const [result, setResult] = useState([])
+  const { result, dispatch } = useContext(ShopContext);
 
-// useEffect(() => {
-//     const counts = items.reduce((acc, item) => {
-//       const key = JSON.stringify(item);
-//       acc[key] = (acc[key] || 0) + 1;
-//       return acc;
-//     }, {});
-//     const result = Object.entries(counts).map(([key, count]) => {
-//       const product = JSON.parse(key);
-//       return { ...product, count };
-//     });
-//     setResult(result)
-// }, [items])
+  const incrementCount = (id) => {
+    dispatch({ type: "INCREMENT_COUNT", payload: id });
+  };
 
+  const decrementCount = (id) => {
+    dispatch({ type: "DECREMENT_COUNT", payload: id });
+  };
 
   return (
     <div>
       {result.map((product) => {
         return (
           <div key={product.id}>
-            <CheckoutItem {...product} />
+            <CheckoutItem {...product} incrementCount={() => incrementCount(product.id)} decrementCount={() => decrementCount(product.id)} />
           </div>
         );
       })}
@@ -33,5 +27,6 @@ const Checkout = () => {
     </div>
   );
 };
+
 
 export default Checkout;
