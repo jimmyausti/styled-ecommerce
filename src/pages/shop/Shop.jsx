@@ -17,7 +17,7 @@ const ProductWrapper = styled.div`
 
 const Shop = () => {
 
-  const {result} = useContext(ShopContext);
+  const {result, isClicked} = useContext(ShopContext);
 
   const { data, isLoading } = useQuery(["products"], () =>
     axios.get("https://fakestoreapi.com/products").then((res) => res.data)
@@ -26,7 +26,7 @@ const Shop = () => {
   return (
     <ProductWrapper>
       {data &&
-        data.map((product) => <ShopItem key={product?.id} {...product} result={result}/>)}
+        data.map((product) => <ShopItem key={product?.id} {...product} result={result} isClicked={isClicked}/>)}
         {isLoading && <div>Loading ...</div>}
     </ProductWrapper>
   );

@@ -11,6 +11,8 @@ const CheckoutItem = (props) => {
       <p>{title}</p>
       <p>${props?.price}</p>
       <p>Amount: <b>{count}</b></p>
+      <button style={{width: '24px'}}>+</button>
+      <button style={{width: '24px'}}>-</button>
     </div>
   );
 };

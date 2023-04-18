@@ -5,8 +5,11 @@ const ShopContext = createContext();
 export const ShopProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [result, setResult] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+
   const addToCart = (title, image, id, price) => {
     setItems((prevList) => [...prevList, { title, image, price, id }]);
+    setIsClicked(true);
   };
 
   
@@ -22,7 +25,7 @@ export const ShopProvider = ({ children }) => {
     });
     setResult(result);
   }, [items]);
-  const value = { items, setItems, addToCart, result, setResult };
+  const value = { items, setItems, addToCart, result, setResult, isClicked, setIsClicked };
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };
 

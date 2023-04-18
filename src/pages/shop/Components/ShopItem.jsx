@@ -24,33 +24,25 @@ const ShopItemWrapper = styled.div`
 
 
 export const ShopItem = (props) => {
-  const { id, image, title, price, result } = props;
-  const {addToCart } = useContext(ShopContext);
+  const { id, image, title, price, isClicked } = props;
+  const {addToCart, setIsClicked } = useContext(ShopContext);
+
   
-console.log(result)
 
-
-//  const countArray = result?.map(obj => {
-//   return {
-//     id: obj.id,
-//     count: obj.count
-//   }
-//  })
-
-//  console.log(countArray)
 
 
   const handleAddToCart = () => {
     addToCart(title, image, id, price);
+    setIsClicked(!isClicked);
   };
 
 
   return (
-    <ShopItemWrapper>
+    <ShopItemWrapper id={id}>
       <img src={image} alt={title} />
       <p>{title}</p>
       <p>${price}</p>
-      <button onClick={handleAddToCart}>Add to Cart  <>{result[id] && result[id].count}</></button>
+      <button onClick={handleAddToCart} disabled={isClicked}>{isClicked ? <>Item added</> : <>Add Item to cart</>}</button>
     </ShopItemWrapper>
   );
 };
